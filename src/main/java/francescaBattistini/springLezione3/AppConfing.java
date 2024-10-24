@@ -5,12 +5,14 @@ import francescaBattistini.springLezione3.entities.Drinks;
 import francescaBattistini.springLezione3.entities.Menu;
 import francescaBattistini.springLezione3.entities.Pizzas;
 import francescaBattistini.springLezione3.entities.Toppings;
+import lombok.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration//essenziale per creare i beans
-
+@PropertySource("application.properties")
 public class AppConfing {
     // Beans TOPPINGS
     @Bean
@@ -72,6 +74,9 @@ public class AppConfing {
       menu.aggiungiDettagliMenu(birra());
       return menu;
     }
+    @Bean
+    public String PrezzoCoperto(@Value("${ costo.coperto  }") String costoCoperto){return costoCoperto;}
+
 
 
 }
