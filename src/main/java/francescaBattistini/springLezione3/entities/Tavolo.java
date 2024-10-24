@@ -1,6 +1,7 @@
 package francescaBattistini.springLezione3.entities;
 
-import FrancescaBattistini.LezioneSpring2.enums.StatoTavolo;
+
+import francescaBattistini.springLezione3.enums.StatoTavolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

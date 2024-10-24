@@ -1,6 +1,7 @@
 package francescaBattistini.springLezione3.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.Getter;
@@ -16,9 +17,8 @@ import java.util.List;
 @Entity
 public class Pizzas extends DettagliMenu {
     @ManyToMany//con toppings
-    @JoinTable()
-
-
+    @JoinTable(name = "pizza", joinColumns = @JoinColumn(name = "pizza-id"),
+    inverseJoinColumns = @JoinColumn(name = "toppings_id"))
 
     private List<Toppings> toppings;
 
@@ -29,6 +29,15 @@ public class Pizzas extends DettagliMenu {
 
     public void addToppings(Toppings top){ //aggiungo i Topping alla pizza  quando richiamato
         this.toppings.add(top);
+    }
+
+    public Double getPrice(){
+        Double totalePrezzo= this.price;
+        for (Toppings toppings : toppings){
+            totalePrezzo+= toppings.getPrice();
+        }
+        return totalePrezzo;
+
     }
 
     @Override
