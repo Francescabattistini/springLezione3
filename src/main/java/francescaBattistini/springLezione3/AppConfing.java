@@ -1,11 +1,9 @@
 package francescaBattistini.springLezione3;
 
 
-import francescaBattistini.springLezione3.entities.Drinks;
-import francescaBattistini.springLezione3.entities.Menu;
-import francescaBattistini.springLezione3.entities.Pizzas;
-import francescaBattistini.springLezione3.entities.Toppings;
-import lombok.Value;
+import francescaBattistini.springLezione3.entities.*;
+import francescaBattistini.springLezione3.enums.StatoTavolo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -75,8 +73,20 @@ public class AppConfing {
       return menu;
     }
     @Bean
-    public String PrezzoCoperto(@Value("${ costo.coperto  }") String costoCoperto){return costoCoperto;}
-
-
+    public String PrezzoCoperto(@Value("$ {costo.coperto}")String costoCoperto) {return costoCoperto;}
+@Bean
+    public Tavolo tavolo(){return new Tavolo(2,3, StatoTavolo.LIBERO);}
+@Bean
+    public Ordine ordine1 ( @Value("${costo.coperto}")Double costoCoperto ){
+        Ordine ordine = new Ordine(12,120,1, tavolo());
+        Pizzas margheritaConProsciutto = margherita();
+        ordine.addportata(margheritaConProsciutto);
+        margheritaConProsciutto.addToppings(prosciutto());
+        ordine.addportata(Hawai());
+        ordine.addportata(acqua());
+        ordine.addportata(cocacola());
+        ordine.getContoTavolo();
+                return ordine;
+}
 
 }

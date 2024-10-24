@@ -23,7 +23,7 @@ public class Ordine {
     private int costoCoperto;
 // modifico il costrutto perchè così gli do dei valori predefiniti di partenza che poi cambierò in seguito.
 
-    public Ordine(Tavolo tavolo, int numeroOrdine, int numeroCoperti,int costoCoperto) {
+    public Ordine( int numeroOrdine, int numeroCoperti,int costoCoperto,Tavolo tavolo) {
         this.tavolo = tavolo;
         this.elementiMenu = elementiMenu;
         this.numeroOrdine = numeroOrdine;
